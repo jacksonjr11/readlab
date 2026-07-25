@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
 import { BookModule } from './book/book.module';
 import { BookRepository } from './book/repositories/implementations/book.repository';
-import { BookRepository } from './book/repositories/interfaces/book.repository';
+import { BookRepository as IBookRepository } from './book/repositories/interfaces/book.repository';
 
 @Module({
   imports: [BookModule],
   providers: [
     {
-      provide: BookRepository,
+      provide: IBookRepository,
       useClass: BookRepository,
     },
   ],
