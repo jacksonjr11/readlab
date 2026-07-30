@@ -8,3 +8,58 @@ services:
       - POSTGRES_PASSWORD=root
     ports:
       - 5432:5432
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d readlab"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend-development:
+    container_name: readlab-backend-development
+    build:
+      context: ./backend
+      target: development
+    command: yarn start:dev
+    environment:
+      NODE_ENV: development
+      PORT: 3000
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: readlab
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      CHOKIDAR_USEPOLLING: "true"
+    ports:
+      - 3000:3000
+    volumes:
+      - ./backend:/usr/src/app
+      - backend_node_modules:/usr/src/app/node_modules
+    depends_on:
+      db:
+        condition: service_healthy
+    profiles:
+      - development
+
+  backend-production:
+    container_name: readlab-backend-production
+    build:
+      context: ./backend
+      target: production
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: readlab
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+    ports:
+      - 3001:3000
+    depends_on:
+      db:
+        condition: service_healthy
+    profiles:
+      - production
+
+volumes:
+  backend_node_modules:
