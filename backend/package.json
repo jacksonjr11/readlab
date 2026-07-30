@@ -18,7 +18,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "migration": "sh -c 'dir=src/infrastructure/database/migrations; stamp=$(date +%Y%m%d%H%M); file_stamp=$(date +%Y.%m.%d-%H:%M); npx typeorm migration:create \"$dir/$1\" -t \"$stamp\"; file=\"$dir/$file_stamp-$1.ts\"; mv \"$dir/$stamp-$1.ts\" \"$file\"; perl -0pi -e \"s/class ([A-Za-z]+)s$stamp/class \\$1/ || s/class ([A-Za-z]+)$stamp/class \\$1/\" \"$file\"' --"
+    "migration": "sh -c 'dir=src/infrastructure/database/migrations; stamp=$(node -e \"process.stdout.write(Date.now().toString())\"); file_stamp=$(date +%Y.%m.%d-%H:%M); npx typeorm migration:create \"$dir/$1\" -t \"$stamp\"; file=\"$dir/$file_stamp-$1.ts\"; mv \"$dir/$stamp-$1.ts\" \"$file\"' --"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",

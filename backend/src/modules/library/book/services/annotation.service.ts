@@ -3,7 +3,7 @@ import { BookModel } from '../dto/book/book.model';
 import { BookRepository } from '../repositories/interfaces/book.repository';
 
 @Injectable()
-export class BookService {
+export class AnnotationService {
   constructor(private readonly repository: BookRepository) {}
 
   public async findByID(id: string): Promise<BookModel> {

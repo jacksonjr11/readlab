@@ -13,4 +13,5 @@ export const PostgresConnection: TypeOrmModuleOptions = {
   entities: [__dirname + '/entities/*{.ts,.js}'],
   synchronize: false,
   migrations: [__dirname + '/migrations/*{.js,.ts}'],
+  migrationsRun: true,
 };
