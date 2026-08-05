@@ -5,6 +5,9 @@ import { PersonEntity } from './person.entity';
 @Entity({ schema: 'core', name: 'user' })
 export class UserEntity extends GeneralEntity {
   @Column()
+  username!: string;
+
+  @Column()
   login!: string;
 
   @Column()
