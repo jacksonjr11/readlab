@@ -3,9 +3,9 @@ import { MigrationInterface, QueryRunner } from 'typeorm';
 export class CreateTableBook1785804187519 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(`
-        CREATE TABLE IF NOT EXISTS book (
+        CREATE TABLE IF NOT EXISTS core.book (
             id UUID PRIMARY KEY NOT NULL DEFAULT uuidv7(),
-            user_id UUID NOT NULL REFERENCES user(id) ON DELETE CASCADE,
+            user_id UUID NOT NULL REFERENCES core.user(id) ON DELETE CASCADE,
             title TEXT NOT NULL,
             description TEXT,
             author TEXT NOT NULL,
@@ -19,7 +19,7 @@ export class CreateTableBook1785804187519 implements MigrationInterface {
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(`
-        DROP TABLE IF EXISTS book;
+        DROP TABLE IF EXISTS core.book;
     `);
   }
 }
