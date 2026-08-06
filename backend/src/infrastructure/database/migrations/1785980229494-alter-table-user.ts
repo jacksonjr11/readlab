@@ -11,7 +11,7 @@ export class AlterTableUser1785980229494 implements MigrationInterface {
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(`
-        ALTER TABLE user
+        ALTER TABLE core.user
         DROP COLUMN IF EXISTS username,
         DROP COLUMN IF EXISTS active;
     `);
