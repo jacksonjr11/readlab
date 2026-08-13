@@ -16,4 +16,8 @@ export class UserEntity extends GeneralEntity {
   @ManyToOne(() => PersonEntity)
   @JoinColumn({ name: 'person_id' })
   person!: PersonEntity;
+
+  getPasswordDecrypted(): string {
+    return this.password;
+  }
 }
