@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
-import { jwtConfig } from './config/jwt/jwt.config';
+import { JwtConfig } from './config/jwt/jwt.config';
 import { AuthService } from './services/auth.service';
 import { UserModule } from '../user/user.module';
 
@@ -10,8 +10,8 @@ import { UserModule } from '../user/user.module';
     UserModule,
     PassportModule,
     JwtModule.register({
-      secret: jwtConfig.secret,
-      signOptions: jwtConfig.signOptions,
+      secret: JwtConfig.secret,
+      signOptions: JwtConfig.signOptions,
     }),
   ],
   providers: [AuthService],
