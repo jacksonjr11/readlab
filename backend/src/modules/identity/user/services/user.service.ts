@@ -15,4 +15,16 @@ export class UserService {
 
     return response;
   }
+
+  public async findByUsername(username: string): Promise<UserModel | null> {
+    const entity = await this.repository.findByUsername(username);
+    if (!entity) {
+      return null;
+    }
+    const response: UserModel = {
+      id: entity.id,
+      username: entity.username,
+    };
+    return response;
+  }
 }
